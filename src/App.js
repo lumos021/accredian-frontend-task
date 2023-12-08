@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Button, Container, Typography, Grid } from '@mui/material';
+import LoginForm from './components/forms/LoginForm';
+import RegisterForm from './components/forms/RegisterForm';
 
 function App() {
+  const [showLoginForm, setShowLoginForm] = useState(true);
+
+  const toggleForm = () => {
+    setShowLoginForm(!showLoginForm);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: '100vh' }}
+      >
+        <Typography variant="h5" style={{ marginBottom: '20px' }}>
+          Authentication
+        </Typography>
+        <Grid item xs={12}>
+          {showLoginForm ? <LoginForm /> : <RegisterForm />}
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={toggleForm}
+            style={{ marginTop: '20px' }}
+          >
+            {showLoginForm ? 'Not Registered? Signup!' : 'Already registered? Login'}
+          </Button>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
